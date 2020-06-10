@@ -31,21 +31,29 @@
                             <form action="" method="post">
                                 <div class="form-group">
                                     <label for="jenis-pesanan">Jenis Pesanan</label>
-                                    <select class="form-control" id="jenis-pesanan" name="jenis-pesanan">
-                                        <option value="makanan">Makanan</option>
-                                        <option value="minuman">Minuman</option>
+                                    <select class="form-control" id="jenis-pesanan" name="jenis-pesanan" onchange="pilihMenu(this)">
+                                        <?php
+                                        $select =1;
+                                        if($select==1):?>
+                                            <option value="1" selected>Makanan</option>
+                                            <option value="2" >Minuman</option>
+                                            <?php $select =1;
+                                        else:?>
+                                            <option value="2" selected>Minuman</option>
+                                            <option value="1" >Makanan</option>
+                                            <?php $select =2;
+                                        endif;?>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama-pesanan">Nama Pesanan</label>
-                                    <select class="form-control" id="nama-pesanan" name="nama-pesanan">
-                                        <option value="">Nasi Goreng</option>
-                                        <option value="">Ayam Goreng</option>
+                                    <select class="form-control" id="nama-pesanan" name="nama-pesanan" onchange="idMenu(this)">
+                                    
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="harga-satuan">Harga Satuan</label>
-                                    <input type="text" class="form-control" id="harga-satuan" name="harga-satuan" value="Rp. 20.000,00-" readonly>
+                                    <input type="text" class="form-control" id="harga-satuan" name="harga-satuan" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="jumlah-pesan">Jumlah Pesan</label>
@@ -57,7 +65,7 @@
                                 </div>
 
                                 <div class="mt-5 tombol">
-                                    <button class="btn btn-success btn-block">
+                                    <button class="btn btn-success btn-block" onclick="tambahKeKeranjang()" type="button">
                                         Add to Cart
                                     </button>
                                 </div>
@@ -84,17 +92,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="daftar-pesanan">
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Nasi Goreng</td>
-                                                <td>1</td>
-                                                <td>20000</td>
-                                                <td>
-                                                    <button class="btn btn-danger">
-                                                    <span class="fas fa-trash"></span>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            
                                         </tbody>
 
                                     </table>
@@ -176,3 +174,131 @@
             </div>
         </div>
     </div>
+    
+    <!-- script js untuk pesanan -->
+    <script src="<?= base_url('assets/js/jquery-3.5.1.min.js'); ?>"></script>
+    <script src="<?= base_url('assets/js/jquery-ui.min.js'); ?>"></script>
+    <!-- end script js untuk pesanan -->
+
+    <script type="text/javascript">
+    var jenisMenu;
+    var kodeMenu;
+    var hargaSatuan;
+    var jumlahPesan;
+    var total;
+    
+    $(document).ready(function() {
+        jenisMenu= '<?= $select;?>';
+        getMenu(jenisMenu);
+        getKeranjang();
+    });
+
+    function pilihMenu(val){
+        jenisMenu = val.value;
+        getMenu(jenisMenu);
+    }
+
+    function idMenu(val){
+        kodeMenu = val.value;
+        getHarga(jenisMenu,kodeMenu);
+    }
+
+    function getMenu(jenisMenu){//memunculkan menu pada select-option #nama-pesanan
+        $.ajax({
+            type: "POST",
+            data: 'jenisMenu=' + jenisMenu,
+            url: '<?= base_url('c_kasir/getMenu'); ?>',
+            success: function(hasil) {
+                $('#nama-pesanan').html(hasil);
+                kodeMenu = document.getElementById("nama-pesanan").value;
+                getHarga(jenisMenu,kodeMenu);
+            }
+        });
+    }
+
+    function getHarga(jenisMenu,kodeMenu){//memunculkan harga dari makanan yang dipilih
+        $.ajax({
+            type: "POST",
+            data: 'jenisMenu=' + jenisMenu +'&kodeMenu=' + kodeMenu,
+            url: '<?= base_url('c_kasir/getHarga'); ?>',
+            success: function(data) {
+                hargaSatuan = data;
+                document.getElementById("harga-satuan").value="Rp. "+Number(data).toLocaleString();
+                totalHarga(jumlahPesan,hargaSatuan);
+            }
+        });
+    }
+
+    //ajax untuk mengambil angka yang diinputkan
+    jQuery(function($) {
+        //saat load
+        jumlahPesan = $('#jumlah-pesan').val();
+        totalHarga(jumlahPesan,hargaSatuan);
+
+        //ketika berubah atau diinputkan
+        $('#jumlah-pesan').on('input', function() {
+            jumlahPesan = $('#jumlah-pesan').val();
+            totalHarga(jumlahPesan,hargaSatuan);
+        });
+       
+    });
+
+    //fungsi untuk menampilkan total harga
+    function totalHarga(jumlahPesan,hargaSatuan){
+        total = Number(jumlahPesan)*Number(hargaSatuan);
+        document.getElementById("total-harga").value="Rp. "+Number(total).toLocaleString();
+    }
+
+    //fungsi menambahkan data dari form ke keranjang
+    function tambahKeKeranjang(){
+        var coba = document.getElementById("nama-pesanan");
+        var namaPsn = coba.options[coba.selectedIndex].text; //mengambil dari combo box berupa text
+        var jumlahPsn = $("[name='jumlah-pesan']").val();
+        var totalPsn = total;
+
+        $.ajax({
+            type: "POST",
+            data: 'namaPesanan=' + namaPsn +'&jumlahPesan=' + jumlahPsn +'&totalHarga=' + totalPsn,
+            url: '<?= base_url('c_kasir/addToCart'); ?>',
+            success: function(data) {
+                getKeranjang();
+            }
+        });
+    }
+
+    //fungsi melihat data dari tabel keranjang
+    function getKeranjang(){
+        $.ajax({
+            type: "POST",
+            url: '<?= base_url('c_kasir/getKeranjang'); ?>',
+            dataType: 'json',
+            success: function(data) {
+                var baris="";
+                for (var i =0; i<data.length; i++){
+                    var no = i+1;
+                    baris += '<tr>'+
+                                    '<td>'+no+'</td>' +
+                                    '<td>'+data[i].nama_pesanan+'</td>' +
+                                    '<td>'+data[i].jumlah_pesanan+'</td>' +
+                                    '<td>'+data[i].harga_pesanan+'</td>' +
+                                    '<td><button class="btn btn-danger" type="button" onclick="deleteItemPesanan('+data[i].id+')"><span class="fas fa-trash"></span></button></td>' +
+                            '</tr>';
+                }
+                $('#daftar-pesanan').html(baris);
+            }
+        });
+    }
+
+    //fungsi hapus dari keranjang
+    function deleteItemPesanan(id){
+        $.ajax({
+            type: "POST",
+            url: '<?= base_url()."c_kasir/deleteItemPesanan/"?>'+id+'',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                getKeranjang();
+            }
+        });
+    }
+    </script>
