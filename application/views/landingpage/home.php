@@ -6,7 +6,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item">
-                        <button type="button" class="btn nav-link" data-toggle="modal" data-target="#login">
+                        <button type="button" class="btn nav-link" data-toggle="modal" data-target="#loginCustomer">
                             Reservasi Online
                         </button>
                     </li>
@@ -125,38 +125,33 @@
         </div>
     </footer>
 
-    <!-- Modal Login -->
-    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
+
+     <!-- Modal Login Customer-->
+     <div class="modal fade" id="loginCustomer" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginLabel">Login</h5>
+                    <h5 class="modal-title" id="loginLabel">Login Customer</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="user" method="post" action="">
+                    <?php echo form_open('auth/loginCustomer');?>
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Username" value="">
+                            <input type="text" class="form-control form-control-user" name="username" placeholder="Masukan Username" require>
                         </div>
                         <div class=" form-group">
-                            <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
+                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password" require>
                         </div>
-
-                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                            Login
-                        </button>
-
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Masuk Akun</button>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn nav-link" style="color: royalblue;" data-toggle="modal" data-dismiss="modal" data-target="#register">Register</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Register -->
+
+    <!-- Modal Register Customer-->
     <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -167,24 +162,29 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="user" method="post" action="">
+                    <?php echo form_open_multipart('auth/registerCustomer');?>
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="nama" name="nama" placeholder="Nama">
-
+                            <input type="text" class="form-control form-control-user" name="nama" placeholder="Masukan Nama" require>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Username">
-
+                            <input type="email" class="form-control form-control-user" name="email" placeholder="Email" require>
                         </div>
                         <div class=" form-group">
-                            <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
-
+                            <input type="number" class="form-control form-control-user" name="no_telp" placeholder="No Telp" require>
                         </div>
-
-                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                            Register
-                        </button>
-
+                        <div class=" form-group">
+                            <div>
+                                <label for="gambarCustomer">Foto</label>
+                            </div>
+                            <input type="file" id="gambarCustomer" name="gambar" require>
+                        </div>
+                        <div class=" form-group">
+                            <input type="text" class="form-control form-control-user" name="username" placeholder="Username" require>
+                        </div>
+                        <div class=" form-group">
+                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password" require>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Register</button>
                     </form>
                 </div>
                 <div class="modal-footer">

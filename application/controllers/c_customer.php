@@ -18,4 +18,10 @@ class c_customer extends CI_Controller
         $this->load->view('user/w_customer', $data);
         $this->load->view('templates/footer');
     }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('auth/index');
+    }
 }

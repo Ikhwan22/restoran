@@ -6,9 +6,18 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item">
-                        <button type="button" class="btn nav-link" data-toggle="modal" data-target="#profil">
+                        <!-- <button type="button" class="btn nav-link" data-toggle="modal" data-target="#profil">
                             Profil
-                        </button>
+                        </button> -->
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: transparent;">
+                              <?= $this->session->userdata('no_telp')?>
+                            </button>
+                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a href="" class="dropdown-item" data-toggle="modal" data-target="#profil">Edit Profil</a>
+                                <a href="<?= base_url('c_customer/logout')?>" class="dropdown-item" onclick="return confirm('Apakah anda yakin ingin memesan paket ini?')">Logout</a>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -50,22 +59,22 @@
                 <div class="form-group row">
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <label for="nama">Nama</label>
-                        <input type="text" class="form-control form-control-user" id="nama" name="nama">
+                        <input type="text" class="form-control form-control-user" name="nama" value="<?= $this->session->userdata('nama')?>" readonly require>
                     </div>
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control form-control-user" id="email" name="email">
+                        <input type="email" class="form-control form-control-user" name="email" value="<?= $this->session->userdata('email')?>" readonly require>
                     </div>
                     <div class="col-sm-4">
                         <label for="telepon">Telepon</label>
-                        <input type="text" class="form-control form-control-user" id="telepon" name="telepon">
+                        <input type="number" class="form-control form-control-user" name="telepon" value="<?= $this->session->userdata('no_telp')?>" readonly require>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <label for="meja">Meja</label>
-                        <select class="form-control" id="meja">
+                        <select class="form-control" id="meja" name="meja">
                             <option value=""></option>
                             <option value="1">e1</option>
                             <option value="2">e2</option>
@@ -84,7 +93,7 @@
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <div class="dropdown">
                             <label for="bayar">Bayar</label>
-                            <select class="form-control" id="bayar">
+                            <select class="form-control" name="bayar">
                                 <option value=""></option>
                                 <option value="1">Transfer</option>
                             </select>
@@ -92,7 +101,7 @@
                     </div>
                     <div class="col-sm-4">
                         <label for="waktu">Waktu</label>
-                        <input type="text" class="form-control form-control-user" id="Waktu" name="Waktu" placeholder="Contoh = 17.00">
+                        <input type="text" class="form-control form-control-user" name="waktu" placeholder="Contoh = 17.00">
                     </div>
                 </div>
 
@@ -114,12 +123,13 @@
             </div>
         </div>
     </footer>
+
     <!-- Modal Profil -->
     <div class="modal fade" id="profil" tabindex="-1" role="dialog" aria-labelledby="profilLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="profilLabel">Profil</h5>
+                    <h5 class="modal-title" id="profilLabel">Edit Profil</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
