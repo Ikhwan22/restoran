@@ -3,12 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class auth extends CI_Controller
 {
-    // function __construct()
-    // {
-    //     parent::__construct();
-    //     $this->load->model('m_menu');
-    //     $this->load->model('m_customer');
-    // }
 
     public function index()
     {
@@ -24,25 +18,21 @@ class auth extends CI_Controller
     {
       $username = $this->input->post('username', true);
       $password = $this->input->post('password', true);
-      $result = $this->m_customer->auth($username);
-      $data = $result->row_array();
+      $result = $this->m_customer->auth($username, $password);
       if($result->num_rows() > 0){
-         foreach($result->result() as $data){
-            if(password_verify($password, $data->password)){
-               $newdata = array(
-                   'id'       => $data->id,
-                   'nama'     => $data->nama,
-                   'email'    => $data->email,
-                   'no_telp'  => $data->telepon,
-                   'username' => $data->username,
-                   'gambar'   => $data->foto,
-                   'password' => $data->password,
-                   'level'    => 'customer'
-               );
-               $this->session->set_userdata($newdata);
-               redirect('c_customer/index');
-            } 
-         }
+        $data = $result->row_array();
+        $newdata = array(
+            'id'       => $data['id'],
+            'nama'     => $data['nama'],
+            'email'    => $data['email'],
+            'no_telp'  => $data['telepon'],
+            'username' => $data['username'],
+            'gambar'   => $data['foto'],
+            'password' => $data['password'],
+            'level'    => 'customer'
+        );
+        $this->session->set_userdata($newdata);
+        redirect('c_customer/index');
       } else {
          redirect('auth/index');
       }
@@ -58,7 +48,7 @@ class auth extends CI_Controller
             'telepon'   => $this->input->post('no_telp', true),
             'foto'      => $url,
             'username'  => $this->input->post('username', true),
-            'password'  => password_hash($password, PASSWORD_BCRYPT)
+            'password'  => $password
         );
 
         $this->m_customer->register('user', $data);
