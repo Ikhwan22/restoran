@@ -3,10 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class c_customer extends CI_Controller
 {
-    function __construct()
+     function __construct()
     {
         parent::__construct();
-        $this->load->model('m_menu');
+        if($this->session->userdata('level') !== 'customer') {
+			redirect('auth/index');
+		}
     }
 
     public function index()
@@ -23,5 +25,29 @@ class c_customer extends CI_Controller
     {
         $this->session->sess_destroy();
         redirect('auth/index');
+    }
+
+    public function edit()
+    {
+        $password = $this->input->post('password', true);
+        $data = array(
+            'nama'      => $this->input->post('nama', true),
+            'email'     => $this->input->post('email', true),
+            'telepon'   => $this->input->post('no_telp', true),
+            'username'  => $this->input->post('username', true),
+            'password'  => password_hash($password, PASSWORD_BCRYPT)
+        );
+        if($this->input->post('gambar') != null){
+            $url = $this->m_customer->uploadGambar();
+            $data['foto']  = $url;
+        } 
+        if($this->input->post('password') == null){
+            $data['password'] = $this->session->userdata('password');
+        } else {
+            $data['password'] = password_hash($password, PASSWORD_BCRYPT);
+        }
+        $where = array('id' => $this->session->userdata('id'));
+        $this->m_customer->updateCustomer($where, $data, 'user');
+        redirect('c_customer/index');
     }
 }

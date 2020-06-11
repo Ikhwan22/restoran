@@ -30,15 +30,18 @@ class auth extends CI_Controller
          foreach($result->result() as $data){
             if(password_verify($password, $data->password)){
                $newdata = array(
-                   'nama'    => $data->nama,
-                   'email'   => $data->email,
-                   'no_telp' => $data->telepon,
-                   'no_telp' => $data->telepon,
-
+                   'id'       => $data->id,
+                   'nama'     => $data->nama,
+                   'email'    => $data->email,
+                   'no_telp'  => $data->telepon,
+                   'username' => $data->username,
+                   'gambar'   => $data->foto,
+                   'password' => $data->password,
+                   'level'    => 'customer'
                );
                $this->session->set_userdata($newdata);
                redirect('c_customer/index');
-            }
+            } 
          }
       } else {
          redirect('auth/index');

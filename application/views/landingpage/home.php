@@ -187,9 +187,6 @@
                         <button type="submit" class="btn btn-primary btn-user btn-block">Register</button>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn nav-link" style="color: royalblue;" data-toggle="modal" data-dismiss="modal" data-target="#login">Login</button>
-                </div>
             </div>
         </div>
     </div>

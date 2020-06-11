@@ -29,4 +29,10 @@ class m_customer extends CI_model
       return "";
     }
 
+    public function updateCustomer($where, $data, $table)
+    {
+      $this->db->where($where);
+      $this->db->update($table, $data);
+    }
+
 }

@@ -5,13 +5,14 @@
             <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="<?= base_url('assets/img/logo.png') ?>" alt="" />Adam's Restoran</a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
+                   <img src="<?= base_url($this->session->userdata('gambar'))?>" style="max-width: 100px;">
                     <li class="nav-item">
                         <!-- <button type="button" class="btn nav-link" data-toggle="modal" data-target="#profil">
                             Profil
                         </button> -->
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: transparent;">
-                              <?= $this->session->userdata('no_telp')?>
+                              <?= $this->session->userdata('nama')?>
                             </button>
                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a href="" class="dropdown-item" data-toggle="modal" data-target="#profil">Edit Profil</a>
@@ -55,7 +56,6 @@
             </div>
             <hr>
             <form class="user" method="post" action="">
-
                 <div class="form-group row">
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <label for="nama">Nama</label>
@@ -73,8 +73,8 @@
 
                 <div class="form-group row">
                     <div class="col-sm-4 mb-3 mb-sm-0">
-                        <label for="meja">Meja</label>
-                        <select class="form-control" id="meja" name="meja">
+                        <label for="selectMeja">Meja</label>
+                        <select class="form-control" id="selectMeja" name="meja">
                             <option value=""></option>
                             <option value="1">e1</option>
                             <option value="2">e2</option>
@@ -104,11 +104,7 @@
                         <input type="text" class="form-control form-control-user" name="waktu" placeholder="Contoh = 17.00">
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary btn-user btn-block">
-                    Kirim
-                </button>
-
+                <button type="submit" class="btn btn-primary btn-user btn-block">Lakukan Reservasi</button>
             </form>
         </div>
     </section>
@@ -124,51 +120,41 @@
         </div>
     </footer>
 
-    <!-- Modal Profil -->
-    <div class="modal fade" id="profil" tabindex="-1" role="dialog" aria-labelledby="profilLabel" aria-hidden="true">
+    <!-- Modal Profil Customer-->
+    <div class="modal fade" id="profil" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="profilLabel">Edit Profil</h5>
+                    <h5 class="modal-title" id="registerLabel">Edit Profil</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="user" method="post" action="">
+                    <?php echo form_open_multipart('c_customer/edit');?>
                         <div class="form-group">
-                            <label for="nama">Nama</label>
-                            <input type="text" class="form-control form-control-user" id="nama" name="nama">
+                            <input type="text" class="form-control form-control-user" name="nama" placeholder="Masukan Nama" value="<?= $this->session->userdata('nama')?>" require>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control form-control-user" id="email" name="email">
+                            <input type="email" class="form-control form-control-user" name="email" placeholder="Email" value="<?= $this->session->userdata('email')?>" require>
                         </div>
-                        <div class="form-group">
-                            <label for="telepon">Telepon</label>
-                            <input type="text" class="form-control form-control-user" id="telepon" name="telepon">
+                        <div class=" form-group">
+                            <input type="number" class="form-control form-control-user" name="no_telp" placeholder="No Telp" value="<?= $this->session->userdata('no_telp')?>" require>
                         </div>
-                        <div class="form-group">
-                            <label for="foto">Foto</label>
-                            <input type="file" class="form-control form-control-user" id="foto" name="foto">
+                        <div class=" form-group">
+                            <div>
+                                <label for="gambarCustomer">Foto</label>
+                            </div>
+                            <input type="file" id="gambarCustomer" name="gambar">
                         </div>
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control form-control-user" id="username" name="username">
+                        <div class=" form-group">
+                            <input type="text" class="form-control form-control-user" name="username" placeholder="Username" value="<?= $this->session->userdata('username')?>" require>
                         </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control form-control-user" id="password" name="password">
+                        <div class=" form-group">
+                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
                         </div>
-
-                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                            Simpan
-                        </button>
-
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Edit Profil</button>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-dismiss="modal" data-target="#login">Logout</button>
                 </div>
             </div>
         </div>
