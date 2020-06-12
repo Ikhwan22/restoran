@@ -44,4 +44,19 @@ class c_customer extends CI_Controller
         $this->m_customer->updateCustomer($where, $data, 'user');
         redirect('c_customer/index');
     }
+
+    public function reservasi()
+    {
+        $newDate = date("Y-m-d",strtotime($this->input->post('tanggal')));
+        $data = array(
+            'nama'      => $this->input->post('nama', true),
+            'email'     => $this->input->post('email', true),
+            'telepon'   => $this->input->post('no_telp', true),
+            'meja'      => $this->input->post('meja', true),
+            'tanggal'   => $newDate,
+            'waktu'     => $this->input->post('waktu', true)
+        );
+        $this->m_customer->reservasi('reservasi', $data);
+        redirect('auth/index');
+    }
 }
