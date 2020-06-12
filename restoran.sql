@@ -42,7 +42,7 @@ CREATE TABLE `kasir` (
   `kembalian` int(11) NOT NULL,
   `tanggal` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `kasir` */
 
@@ -54,7 +54,8 @@ insert  into `kasir`(`id`,`nama`,`meja`,`total`,`bayar`,`kembalian`,`tanggal`) v
 (5,'ddd','e7',36000,40000,4000,'2020-06-11 23:44:30'),
 (6,'bbb','e7',9000,10000,1000,'2020-06-11 21:00:29'),
 (7,'bbb','e7',9000,10000,1000,'2020-06-11 23:43:27'),
-(8,'vvv','e3',125000,150000,25000,'2020-06-11 23:48:08');
+(8,'vvv','e3',125000,150000,25000,'2020-06-11 23:48:08'),
+(9,'ccc','e11',200000,200000,0,'2020-06-12 10:53:37');
 
 /*Table structure for table `keranjang` */
 
@@ -186,15 +187,16 @@ CREATE TABLE `user` (
   `foto` varchar(256) NOT NULL,
   `username` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
+  `status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`nama`,`email`,`telepon`,`foto`,`username`,`password`) values 
-(2,'ikhwan','ikhwan@gmail.com',85726153280,'gambar/10567702275ee1b282e33ad.png','ikhwan','$2y$10$HoM9mrgv5pajWGJco.04ZObMt5f5OKwSWFhIyoxyT8Ab3m7bOu/oO'),
-(3,'akbar','akbar@gmail.com',837439487397,'gambar/9215120545ee202bf56209.png','akbar','$2y$10$1WtjkwLykI8Ivr/j0jRUzOzxmiV5YVyuZ.eYpCTp08f5mOQMQDH76'),
-(4,'','',0,'','','');
+insert  into `user`(`id`,`nama`,`email`,`telepon`,`foto`,`username`,`password`,`status`) values 
+(5,'ikwhan','ikhwan@gmail.com',837487384,'9215120545ee202bf56209.png','ikhwan','1234','kasir'),
+(6,'ilham','ilham@gmail.com',473647364,'9215120545ee202bf56209.png','ilham','1234','customer'),
+(7,'alvian','alvian@gmail.com',367453764,'10567702275ee1b282e33ad.png','alvian','1234','admin');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
