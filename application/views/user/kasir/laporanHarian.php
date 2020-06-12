@@ -193,28 +193,36 @@
                             '</button>'+
                             '</div>';
                             $('#target-peringatan').html(baris);
-                    }else{}
-                        var baris2="";
-                        for(var i =0; i<data.detail.length; i++){
-                            var no = i+1;
-
-                            var d = new Date(data.detail[i].tanggal);
-                            var waktu = d.toLocaleDateString('en-GB', {
-                            day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'
-                            }).replace(/ /g, ' ');
-
-                            baris2 += '<tr>'+
-                                            '<td>'+no+'</td>' +
-                                            '<td>'+data.detail[i].nama+'</td>' +
-                                            '<td>'+data.detail[i].meja+'</td>' +
-                                            '<td> Rp. '+Number(data.detail[i].total).toLocaleString()+'</td>' +
-                                            '<td> Rp. '+Number(data.detail[i].bayar).toLocaleString()+'</td>' +
-                                            '<td> Rp. '+Number(data.detail[i].kembalian).toLocaleString()+'</td>' +
-                                            '<td>'+waktu+'</td>' +
-                                    '</tr>';
-                        }
-                        $('#laporan-harian').html(baris2);
+                            loadTabel(data);
+                    }else{
+                        $('#target-peringatan').html(baris);
+                        loadTabel(data);
+                    }
+                        
                 }
             });
+        }
+
+        function loadTabel(data){
+            var baris="";
+            for(var i =0; i<data.detail.length; i++){
+                var no = i+1;
+
+                var d = new Date(data.detail[i].tanggal);
+                var waktu = d.toLocaleDateString('en-GB', {
+                day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'
+                }).replace(/ /g, ' ');
+
+                baris += '<tr>'+
+                                '<td>'+no+'</td>' +
+                                '<td>'+data.detail[i].nama+'</td>' +
+                                '<td>'+data.detail[i].meja+'</td>' +
+                                '<td> Rp. '+Number(data.detail[i].total).toLocaleString()+'</td>' +
+                                '<td> Rp. '+Number(data.detail[i].bayar).toLocaleString()+'</td>' +
+                                '<td> Rp. '+Number(data.detail[i].kembalian).toLocaleString()+'</td>' +
+                                '<td>'+waktu+'</td>' +
+                        '</tr>';
+            }
+            $('#laporan-harian').html(baris);
         }
     </script>
