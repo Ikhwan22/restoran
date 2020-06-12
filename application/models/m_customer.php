@@ -3,11 +3,13 @@
 class m_customer extends CI_model
 {
 
-    public function auth($username)
+    public function auth($username, $password)
     {
       $this->db->select('*');
 		  $this->db->from('user');
       $this->db->where('username', $username);
+      $this->db->where('password', $password);
+      $this->db->limit(1);
       $query = $this->db->get();
       return $query;
     }
