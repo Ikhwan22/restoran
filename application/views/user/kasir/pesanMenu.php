@@ -7,7 +7,6 @@
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_kasir/index'); ?>">Pesan Menu</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_kasir/laporanHarian'); ?>">Laporan Harian</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_kasir/laporanBulanan'); ?>">Laporan Bulanan</a></li>
                     <li class="nav-item">
                         <button type="button" style="color: blue;" class="btn nav-link" data-toggle="modal" data-target="#profil">
                             <strong>Profil</strong>

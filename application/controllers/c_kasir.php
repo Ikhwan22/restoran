@@ -4,8 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class c_kasir extends CI_Controller
 {
 //start halaman pesan menu    
-    public function index()
-    {
+    public function index(){
         $this->load->view('templates/header');
         $this->load->view('user/kasir/pesanMenu');
         $this->load->view('templates/footer');
@@ -96,14 +95,16 @@ class c_kasir extends CI_Controller
         $this->load->view('user/kasir/laporanHarian');
         $this->load->view('templates/footer');
     }
-// end halaman laporan harian
 
-// start halaman laporan bulanan
-    function laporanBulanan(){
-        $this->load->view('templates/header');
-        $this->load->view('user/kasir/laporanBulanan');
-        $this->load->view('templates/footer');
+    function getLaporanByTanggal(){
+        $tanggalHarian = $this->input->post('tanggalHarian');
+        $total = $this->m_laporanHarian->getTotalLaporanByTanggal($tanggalHarian)->result();
+        $detail = $this->m_laporanHarian->getLaporanByTanggal($tanggalHarian)->result();
+
+        //$aa = date_format($tanggalHarian,"d M Y");
+        
+        echo json_encode(array("total" =>$total, "detail" =>$detail));
     }
-// end halaman laporan bulanan
+// end halaman laporan harian
 
 }
