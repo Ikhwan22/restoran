@@ -41,6 +41,8 @@ class auth extends CI_Controller
                );
                $this->session->set_userdata($newdata);
                redirect('c_customer/index');
+            }else{
+                redirect('auth/index');
             } 
          }
       } else {

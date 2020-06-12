@@ -3,39 +3,40 @@
 class m_menu extends CI_model
 {
 
-    public function getMakanan()
+    public function getMenu($jenisMenu)//get menu berdasarkan enum makanan / minuman
     {
-        $query = $this->db->query("SELECT * FROM menu_makanan");
-        return $query->result();
-    }
-
-    public function getMinuman()
-    {
-        $query = $this->db->query("SELECT * FROM menu_minuman");
-        return $query->result();
+        $this->db->where('enum',$jenisMenu);
+        return $this->db->get('menu')->result();
     }
 
     //info item pesanan
-    function getItemMakanan($id){//Item makanan tiap satuannya
+    function getItemMenu($id){//Item menu tiap satuannya
         $this->db->where('id',$id);
-        return $this->db->get('menu_makanan');
-    }
-
-    function getItemMinuman($id){//Item minuman tiap satuannya
-        $this->db->where('id',$id);
-        return $this->db->get('menu_minuman');
+        return $this->db->get('menu');
     }
 
     //keranjang
-    function getKeranjang(){
+    function getKeranjang(){//read item
         return $this->db->get('keranjang');
     }
-    function addToCart($data){
+    function addToCart($data){//create item
         $this->db->insert('keranjang', $data);
     }
-    function deleteItemPesanan($id){
+    function deleteItemPesanan($id){//delete item
         $this->db->where('id', $id);
 		$this->db->delete('keranjang');
+    }
+    function totalHargaPesanan(){
+        $this->db->select('SUM(harga_pesanan) AS jumlah');
+        return $this->db->get('keranjang');
+    }
+    function deleteKeranjang(){//hapus seluruh item keranjang
+        $this->db->query("DELETE FROM keranjang");
+    }
+
+    //insert dari keranjang ke tabel kasir
+    function tambahDataKasir($data){
+        $this->db->insert('kasir', $data);
     }
 
 

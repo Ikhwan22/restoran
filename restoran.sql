@@ -40,11 +40,21 @@ CREATE TABLE `kasir` (
   `total` int(11) NOT NULL,
   `bayar` int(11) NOT NULL,
   `kembalian` int(11) NOT NULL,
-  `tanggal` date NOT NULL,
+  `tanggal` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `kasir` */
+
+insert  into `kasir`(`id`,`nama`,`meja`,`total`,`bayar`,`kembalian`,`tanggal`) values 
+(1,'ikhwan','e5',50000,50000,0,'2020-06-11 17:30:56'),
+(2,'akbar','e1',227000,300000,73000,'2020-06-11 23:44:22'),
+(3,'asd','e1',62000,70000,8000,'2020-06-11 23:44:25'),
+(4,'ddd','e7',36000,40000,4000,'2020-06-11 23:44:28'),
+(5,'ddd','e7',36000,40000,4000,'2020-06-11 23:44:30'),
+(6,'bbb','e7',9000,10000,1000,'2020-06-11 21:00:29'),
+(7,'bbb','e7',9000,10000,1000,'2020-06-11 23:43:27'),
+(8,'vvv','e3',125000,150000,25000,'2020-06-11 23:48:08');
 
 /*Table structure for table `keranjang` */
 
@@ -56,14 +66,9 @@ CREATE TABLE `keranjang` (
   `jumlah_pesanan` int(11) DEFAULT NULL,
   `harga_pesanan` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `keranjang` */
-
-insert  into `keranjang`(`id`,`nama_pesanan`,`jumlah_pesanan`,`harga_pesanan`) values 
-(2,'Nasi Goreng',4,68000),
-(4,'Teh',5,15000),
-(5,'Soda Gembira',3,24000);
 
 /*Table structure for table `kritik_saran` */
 
@@ -126,45 +131,31 @@ insert  into `lokasi`(`id`,`nama`) values
 (6,'Medan'),
 (7,'Solo');
 
-/*Table structure for table `menu_makanan` */
+/*Table structure for table `menu` */
 
-DROP TABLE IF EXISTS `menu_makanan`;
+DROP TABLE IF EXISTS `menu`;
 
-CREATE TABLE `menu_makanan` (
+CREATE TABLE `menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(255) NOT NULL,
   `harga` int(11) NOT NULL,
+  `enum` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
-/*Data for the table `menu_makanan` */
+/*Data for the table `menu` */
 
-insert  into `menu_makanan`(`id`,`nama`,`harga`) values 
-(1,'Ayam Goreng',20000),
-(2,'Bebek Goreng',25000),
-(3,'Nasi Goreng',17000),
-(4,'Ikan Bakar',40000),
-(5,'Kepiting Asam Manis',50000);
-
-/*Table structure for table `menu_minuman` */
-
-DROP TABLE IF EXISTS `menu_minuman`;
-
-CREATE TABLE `menu_minuman` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nama` varchar(255) NOT NULL,
-  `harga` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `menu_minuman` */
-
-insert  into `menu_minuman`(`id`,`nama`,`harga`) values 
-(1,'Teh',3000),
-(2,'Jeruk\r\n(dingin/hangat)',4000),
-(3,'Jus',10000),
-(4,'Kopi\r\n(dingin/hangat)',6000),
-(5,'Soda Gembira',8000);
+insert  into `menu`(`id`,`nama`,`harga`,`enum`) values 
+(1,'Ayam Goreng',20000,'makanan'),
+(2,'Nasi Goreng',17000,'makanan'),
+(3,'Bebek Goreng',25000,'makanan'),
+(4,'Ikan Bakar',40000,'makanan'),
+(5,'Kepiting Asam Manis',50000,'makanan'),
+(6,'Teh',3000,'minuman'),
+(7,'Jeruk (dingin/hangat)',4000,'minuman'),
+(8,'Jus',10000,'minuman'),
+(9,'Kopi (dingin/hangat)',6000,'minuman'),
+(10,'Soda Gembira',8000,'minuman');
 
 /*Table structure for table `reservasi` */
 
@@ -196,9 +187,14 @@ CREATE TABLE `user` (
   `username` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `user` */
+
+insert  into `user`(`id`,`nama`,`email`,`telepon`,`foto`,`username`,`password`) values 
+(2,'ikhwan','ikhwan@gmail.com',85726153280,'gambar/10567702275ee1b282e33ad.png','ikhwan','$2y$10$HoM9mrgv5pajWGJco.04ZObMt5f5OKwSWFhIyoxyT8Ab3m7bOu/oO'),
+(3,'akbar','akbar@gmail.com',837439487397,'gambar/9215120545ee202bf56209.png','akbar','$2y$10$1WtjkwLykI8Ivr/j0jRUzOzxmiV5YVyuZ.eYpCTp08f5mOQMQDH76'),
+(4,'','',0,'','','');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
