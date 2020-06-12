@@ -186,14 +186,15 @@
                 
                     var baris="";
                     if(data.detail.length == 0){
-                        var baris = '<div class="alert alert-warning alert-dismissible fade show" role="alert">'+
+                        baris = '<div class="alert alert-warning alert-dismissible fade show" role="alert">'+
                             '<strong>Tidak ada Laporan Pada Tanggal '+formattedDate+'</strong>'+
                             '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
                                 '<span aria-hidden="true">&times;</span>'+
                             '</button>'+
                             '</div>';
                             $('#target-peringatan').html(baris);
-                    }else{
+                    }else{}
+                        var baris2="";
                         for(var i =0; i<data.detail.length; i++){
                             var no = i+1;
 
@@ -202,7 +203,7 @@
                             day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'
                             }).replace(/ /g, ' ');
 
-                            baris += '<tr>'+
+                            baris2 += '<tr>'+
                                             '<td>'+no+'</td>' +
                                             '<td>'+data.detail[i].nama+'</td>' +
                                             '<td>'+data.detail[i].meja+'</td>' +
@@ -212,8 +213,7 @@
                                             '<td>'+waktu+'</td>' +
                                     '</tr>';
                         }
-                        $('#laporan-harian').html(baris);
-                    }
+                        $('#laporan-harian').html(baris2);
                 }
             });
         }
