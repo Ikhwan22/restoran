@@ -6,8 +6,8 @@ class auth extends CI_Controller
 
     public function index()
     {
-        $data['makanan'] = $this->m_menu->getMakanan();
-        $data['minuman'] = $this->m_menu->getMinuman();
+        $data['makanan'] = $this->m_menu->getMenu("makanan");
+        $data['minuman'] = $this->m_menu->getMenu("minuman");
         $data['lokasi'] = $this->m_menu->getLokasi();
         $this->load->view('templates/header');
         $this->load->view('landingpage/home', $data);
@@ -29,12 +29,20 @@ class auth extends CI_Controller
             'username' => $data['username'],
             'gambar'   => $data['foto'],
             'password' => $data['password'],
-            'level'    => 'customer'
+            'status'   => $data['status']
         );
         $this->session->set_userdata($newdata);
-        redirect('c_customer/index');
+
+        if($data['status'] == "customer"){
+            redirect('c_customer/index');
+        }elseif($data['status'] == "kasir"){
+            redirect('c_kasir/index');
+        }elseif($data['status'] == "admin"){
+            redirect('c_admin/index');
+        }
+        
       } else {
-         redirect('auth/index');
+        redirect('auth/index');
       }
     }
 
@@ -48,10 +56,17 @@ class auth extends CI_Controller
             'telepon'   => $this->input->post('no_telp', true),
             'foto'      => $url,
             'username'  => $this->input->post('username', true),
-            'password'  => $password
+            'password'  => $password,
+            'status'    => "customer"
         );
 
         $this->m_customer->register('user', $data);
+        redirect('auth/index');
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
         redirect('auth/index');
     }
 }

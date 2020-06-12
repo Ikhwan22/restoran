@@ -6,25 +6,19 @@ class c_customer extends CI_Controller
      function __construct()
     {
         parent::__construct();
-        if($this->session->userdata('level') !== 'customer') {
+        if($this->session->userdata('status') !== 'customer') {
 			redirect('auth/index');
 		}
     }
 
     public function index()
     {
-        $data['makanan'] = $this->m_menu->getMakanan();
-        $data['minuman'] = $this->m_menu->getMinuman();
+        $data['makanan'] = $this->m_menu->getmenu("makanan");
+        $data['minuman'] = $this->m_menu->getMenu("minuman");
         $data['lokasi'] = $this->m_menu->getLokasi();
         $this->load->view('templates/header');
         $this->load->view('user/w_customer', $data);
         $this->load->view('templates/footer');
-    }
-
-    public function logout()
-    {
-        $this->session->sess_destroy();
-        redirect('auth/index');
     }
 
     public function edit()

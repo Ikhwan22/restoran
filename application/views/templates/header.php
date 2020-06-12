@@ -17,3 +17,75 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="<?= base_url('assets/'); ?>css/styles.css" rel="stylesheet" />
 </head>
+<body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top mb-5" id="mainNav" style="background-color:#212529;">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="<?= base_url('assets/img/logo.png') ?>" alt="" />Adam's Restoran</a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <?php if($this->session->userdata('status') == "customer"):?>
+                        <img src="<?= base_url($this->session->userdata('gambar'))?>" style="max-width: 100px;">
+                        <li class="nav-item">
+                            <!-- <button type="button" class="btn nav-link" data-toggle="modal" data-target="#profil">
+                                Profil
+                            </button> -->
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: transparent;">
+                                <?= $this->session->userdata('nama')?>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a href="" class="dropdown-item" data-toggle="modal" data-target="#profil">Edit Profil</a>
+                                    <a href="<?= base_url('auth/logout');?>" class="dropdown-item" onclick="return confirm('Apakah Anda Yakin ingin Logout?')">Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    <?php elseif($this->session->userdata('status') == "kasir"):?>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_kasir/index'); ?>">Pesan Menu</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_kasir/laporanHarian'); ?>">Laporan Harian</a></li>
+                        <img src="<?= base_url($this->session->userdata('gambar'))?>" style="max-width: 100px;">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: transparent;">
+                                <?= $this->session->userdata('nama');?>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a href="" class="dropdown-item" data-toggle="modal" data-target="#profil">Edit Profil</a>
+                                <a href="<?= base_url('auth/logout');?>" class="dropdown-item" onclick="return confirm('Apakah Anda Yakin ingin Logout?')">Logout</a>
+                            </div>
+                        </div>
+                    <?php elseif($this->session->userdata('status') == "admin"):?>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_admin/tambah_menu'); ?>">Tambah Menu</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_admin/tambah_event'); ?>">Tambah Event</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_admin/laporan_reservasi'); ?>">Laporan Reservasi</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_admin/laporan_bulanan'); ?>">Laporan Bulanan</a></li>
+                        <img src="<?= base_url($this->session->userdata('gambar'))?>" style="max-width: 100px;">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: transparent;">
+                                <?= $this->session->userdata('nama')?>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a href="" class="dropdown-item" data-toggle="modal" data-target="#profil">Edit Profil</a>
+                                <a href="<?= base_url('auth/logout');?>" class="dropdown-item" onclick="return confirm('Apakah Anda Yakin ingin Logout?')">Logout</a>
+                            </div>
+                        </div>
+                    <?php else:?>
+                        <li class="nav-item">
+                            <button type="button" class="btn nav-link" data-toggle="modal" data-target="#loginCustomer">
+                                Reservasi Online
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" class="btn nav-link" data-toggle="modal" data-target="#register">
+                                Register
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" class="btn nav-link" data-toggle="modal" data-target="#loginCustomer">
+                                Login
+                            </button>
+                        </li>
+                    <?php endif;?>
+                </ul>
+            </div>
+        </div>
+    </nav>    

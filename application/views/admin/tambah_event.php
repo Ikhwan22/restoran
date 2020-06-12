@@ -1,25 +1,5 @@
-<body id="page-top">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="<?= base_url('assets/img/logo.png') ?>" alt="" />Adam's Restoran</a><button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fas fa-bars ml-1"></i></button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" style="color: blue;" href="<?= base_url('c_admin/tambah_menu'); ?>"><strong>Tambah Menu</strong></a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" style="color: blue;" href="<?= base_url('c_admin/tambah_event'); ?>"><strong>Tambah Event</strong></a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" style="color: blue;" href="<?= base_url('c_admin/laporan_reservasi'); ?>"><strong>Laporan Reservasi</strong></a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" style="color: blue;" href="<?= base_url('c_admin/laporan_bulanan'); ?>"><strong>Laporan Bulanan</strong></a></li>
-                    <li class="nav-item">
-                        <button type="button" class="btn nav-link" style="color: blue;" data-toggle="modal" data-target="#profil">
-                            <strong>Profil</strong>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
     <!-- Services-->
-    <section class="page-section" id="services">
+    <section class="page-section mt-5" id="services">
         <div class="container">
             <form action="">
                 <div class="form-group row">

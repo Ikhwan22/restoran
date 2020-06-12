@@ -17,8 +17,8 @@ class c_admin extends CI_Controller
     }
     public function tambah_menu()
     {
-        $data['makanan'] = $this->m_menu->getMakanan();
-        $data['minuman'] = $this->m_menu->getMinuman();
+        $data['makanan'] = $this->m_menu->getMenu("makanan");
+        $data['minuman'] = $this->m_menu->getMenu("minuman");
         $this->load->view('templates/header');
         $this->load->view('admin/tambah_menu', $data);
         $this->load->view('templates/footer');
