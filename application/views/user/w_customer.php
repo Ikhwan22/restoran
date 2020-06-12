@@ -29,7 +29,7 @@
                 <h3 class="section-heading text-uppercase">Reservasi Online</h3>
             </div>
             <hr>
-            <form class="user" method="post" action="">
+            <?php echo form_open('c_customer/reservasi');?>
                 <div class="form-group row">
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <label for="nama">Nama</label>
@@ -41,27 +41,27 @@
                     </div>
                     <div class="col-sm-4">
                         <label for="telepon">Telepon</label>
-                        <input type="number" class="form-control form-control-user" name="telepon" value="<?= $this->session->userdata('no_telp')?>" readonly require>
+                        <input type="number" class="form-control form-control-user" name="no_telp" value="<?= $this->session->userdata('no_telp')?>" readonly require>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <label for="selectMeja">Meja</label>
-                        <select class="form-control" id="selectMeja" name="meja">
+                        <select class="form-control" id="selectMeja" name="meja" require>
                             <option value=""></option>
-                            <option value="1">e1</option>
-                            <option value="2">e2</option>
-                            <option value="3">e3</option>
-                            <option value="4">e4</option>
-                            <option value="5">e5</option>
-                            <option value="6">e6</option>
-                            <option value="7">e7</option>
-                            <option value="8">e8</option>
-                            <option value="9">e9</option>
-                            <option value="10">e10</option>
-                            <option value="11">e11</option>
-                            <option value="12">e12</option>
+                            <option value="e1">e1</option>
+                            <option value="e2">e2</option>
+                            <option value="e3">e3</option>
+                            <option value="e4">e4</option>
+                            <option value="e5">e5</option>
+                            <option value="e6">e6</option>
+                            <option value="e7">e7</option>
+                            <option value="e8">e8</option>
+                            <option value="e9">e9</option>
+                            <option value="e10">e10</option>
+                            <option value="e11">e11</option>
+                            <option value="e12">e12</option>
                         </select>
                     </div>
                     <div class="col-sm-4 mb-3 mb-sm-0">
@@ -74,8 +74,14 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <label for="waktu">Waktu</label>
-                        <input type="text" class="form-control form-control-user" name="waktu" placeholder="Contoh = 17.00">
+                        <label for="tanggalPemesanan">Waktu</label>
+                        <input id="tanggalPemesanan" type="date" class="form-control form-control-user" name="tanggal" require>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <label for="waktuPemesanan">Waktu</label>
+                        <input id="waktuPemesanan" type="time" class="form-control form-control-user" name="waktu" require>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-user btn-block">Lakukan Reservasi</button>

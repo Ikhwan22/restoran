@@ -37,4 +37,9 @@ class m_customer extends CI_model
       $this->db->update($table, $data);
     }
 
+    public function reservasi($table, $data)
+    {
+      $this->db->insert($table, $data);
+    }
+
 }
