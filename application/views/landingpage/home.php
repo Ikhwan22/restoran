@@ -65,7 +65,7 @@
                 <h3 class="section-heading text-uppercase">KRITIK DAN SARAN</h3>
             </div>
             <hr>
-            <?php echo form_open('auth/sendKritik');?>
+            <?php echo form_open('auth/kritik');?>
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="nama">Nama</label>

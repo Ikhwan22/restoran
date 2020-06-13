@@ -69,4 +69,14 @@ class auth extends CI_Controller
         $this->session->sess_destroy();
         redirect('auth/index');
     }
+
+    public function kritik(){
+       $data = array(
+           'nama'              => $this->input->post('nama', true),
+           'email'             => $this->input->post('email', true),
+           'kritik_dan_saran'  => $this->input->post('kritik_saran', true),
+       );
+       $this->m_customer->storeKritikSaran('kritik_saran', $data);
+       redirect('auth/index');
+   }
 }
