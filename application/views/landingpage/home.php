@@ -65,26 +65,22 @@
                 <h3 class="section-heading text-uppercase">KRITIK DAN SARAN</h3>
             </div>
             <hr>
-            <form class="user" method="post" action="">
+            <?php echo form_open('auth/sendKritik');?>
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="nama">Nama</label>
-                        <input type="text" class="form-control form-control-user" id="nama" name="nama">
+                        <input type="text" class="form-control form-control-user" id="nama" name="nama" require>
                     </div>
                     <div class="col-sm-6">
-                        <label for="telepon">Telepon</label>
-                        <input type="text" class="form-control form-control-user" id="telepon" name="telepon">
+                        <label for="email">Alamat Email</label>
+                        <input type="email" class="form-control form-control-user" id="email" name="email" require>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="kritik_dan_saran">Kritik dan Saran</label>
-                    <textarea class="form-control" rows="3" aria-label="With textarea"></textarea>
+                    <textarea class="form-control" rows="3" aria-label="With textarea" name="kritik_saran" require></textarea>
                 </div>
-
-                <button type="submit" class="btn btn-primary btn-user btn-block">
-                    Kirim
-                </button>
-
+                <button type="submit" class="btn btn-primary btn-user btn-block">Kirim</button>
             </form>
         </div>
     </section>

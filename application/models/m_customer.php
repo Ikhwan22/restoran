@@ -42,4 +42,9 @@ class m_customer extends CI_model
       $this->db->insert($table, $data);
     }
 
+    public function storeKritikSaran($table, $data)
+    {
+      $this->db->insert($table, $data);
+    }
+
 }
