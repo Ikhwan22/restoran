@@ -25,9 +25,12 @@ CREATE TABLE `event` (
   `nama` varchar(256) NOT NULL,
   `diskon` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `event` */
+
+insert  into `event`(`id`,`nama`,`diskon`) values 
+(1,'ini',15);
 
 /*Table structure for table `kasir` */
 
@@ -42,20 +45,21 @@ CREATE TABLE `kasir` (
   `kembalian` int(11) NOT NULL,
   `tanggal` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `kasir` */
 
 insert  into `kasir`(`id`,`nama`,`meja`,`total`,`bayar`,`kembalian`,`tanggal`) values 
-(1,'ikhwan','e5',50000,50000,0,'2020-06-11 17:30:56'),
-(2,'akbar','e1',227000,300000,73000,'2020-06-11 23:44:22'),
-(3,'asd','e1',62000,70000,8000,'2020-06-11 23:44:25'),
-(4,'ddd','e7',36000,40000,4000,'2020-06-11 23:44:28'),
-(5,'ddd','e7',36000,40000,4000,'2020-06-11 23:44:30'),
-(6,'bbb','e7',9000,10000,1000,'2020-06-11 21:00:29'),
-(7,'bbb','e7',9000,10000,1000,'2020-06-11 23:43:27'),
-(8,'vvv','e3',125000,150000,25000,'2020-06-11 23:48:08'),
-(9,'ccc','e11',200000,200000,0,'2020-06-12 10:53:37');
+(1,'ikhwan','e5',50000,50000,0,'2020-06-11 17:35:00'),
+(2,'akbar','e1',227000,300000,73000,'2020-06-11 17:40:00'),
+(3,'asd','e1',62000,70000,8000,'2020-06-11 18:00:00'),
+(4,'ddd','e7',36000,40000,4000,'2020-06-11 19:00:00'),
+(5,'ddd','e7',36000,40000,4000,'2020-06-11 20:11:56'),
+(6,'bbb','e7',9000,10000,1000,'2020-06-11 09:47:34'),
+(7,'bbb','e7',9000,10000,1000,'2020-06-11 09:50:44'),
+(8,'vvv','e3',125000,150000,25000,'2020-06-11 09:10:00'),
+(9,'ccc','e11',200000,200000,0,'2020-06-12 19:34:56'),
+(10,'asdasda','e1',100000,100000,0,'2020-06-12 20:34:45');
 
 /*Table structure for table `keranjang` */
 
@@ -67,9 +71,12 @@ CREATE TABLE `keranjang` (
   `jumlah_pesanan` int(11) DEFAULT NULL,
   `harga_pesanan` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `keranjang` */
+
+insert  into `keranjang`(`id`,`nama_pesanan`,`jumlah_pesanan`,`harga_pesanan`) values 
+(2,'Ayam Goreng',1,20000);
 
 /*Table structure for table `kritik_saran` */
 
@@ -81,9 +88,14 @@ CREATE TABLE `kritik_saran` (
   `email` varchar(256) NOT NULL,
   `kritik_dan_saran` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `kritik_saran` */
+
+insert  into `kritik_saran`(`id`,`nama`,`email`,`kritik_dan_saran`) values 
+(1,'aaaa','aaa@gmail.com','aaa'),
+(2,'bbbb','bbb@gmail.com','bbbb'),
+(3,'ccc','ccc@gmail.com','ccc');
 
 /*Table structure for table `laporan_bulanan` */
 
@@ -169,11 +181,18 @@ CREATE TABLE `reservasi` (
   `telepon` bigint(20) NOT NULL,
   `meja` varchar(256) NOT NULL,
   `bayar` int(11) NOT NULL,
-  `waktu` varchar(256) NOT NULL,
+  `waktu` time NOT NULL,
+  `tanggal` date NOT NULL,
+  `konfirmasi` int(1) NOT NULL,
+  `alasan_penolakan` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `reservasi` */
+
+insert  into `reservasi`(`id`,`nama`,`email`,`telepon`,`meja`,`bayar`,`waktu`,`tanggal`,`konfirmasi`,`alasan_penolakan`) values 
+(1,'Alvian','alvian@gmail.com',83483847,'e11',50000,'10:00:00','2020-06-14',1,NULL),
+(2,'ilham','ilham@gmail.com',85695124789,'e5',25000,'09:00:00','2020-06-15',2,'nggak sopan');
 
 /*Table structure for table `user` */
 
