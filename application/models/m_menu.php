@@ -51,4 +51,10 @@ class m_menu extends CI_model
         $query = $this->db->query("SELECT * FROM user WHERE username = $username");
         return $query->result();
     }
+    
+    public function getMakanan()
+    {
+        $query = $this->db->query("SELECT * FROM menu");
+        return $query->result();
+    }
 }

@@ -1,82 +1,125 @@
+<style type="text/css">
+  .show-on-print{
+ display: none; 
+}
+
+@media print {
+  .show-on-print{
+    display:block;
+  }
+  .hide-on-print{
+    display: none;
+  }
+ }
+</style>
 
     <!-- Services-->
-    <section class="page-section mt-5" id="services">
+    <section class="page-section  mt-5" id="services">
+        
         <div class="container">
+            <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="name">Pilih Tanggal</label>
+                <input required type="date" name="tanggal" class="form-control" id="datepicker1"> 
 
-            <table class="table table-hover">
+            </div>                    
+          </div>
+            <div class="col-md-4"><div class="form-group">
+              <label for="name">Hingga</label>
+                <input required type="date" name="tanggal2" class="form-control" id="datepicker2"> </div>
+            </div>
+        </div>
+        <button class="add btn btn-primary">Lihat <span class="fas fa-search"> </span></button>
+        <button id="print" style="float: right;" class="btn btn-primary">Print</button>
+            <table class="table table-hover" id="table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nama</th>
-                        <t </tr> </thead> <tbody>
-                    <tr>
-                        <th></th>
-                        <td></td>
-
-                    </tr>
-                    </tbody>
+                        <th scope="col">Tanggal</th>
+                        <th scope="col">Total</th>
+                    </tr> 
+                </thead> 
+                <tbody id="laporan">
+                </tbody>
             </table>
 
         </div>
 
     </section>
+<!-- 	
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
+  
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script> -->
 
-    <!-- Footer-->
-    <footer class="footer py-4">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-4 text-lg-left"><strong>Email : kelompok1@gmail.com</strong></div>
-                <div class="col-lg-4 my-3 my-lg-0"><strong>Copyright © Your Website 2020</strong></div>
-                <div class="col-lg-4 text-lg-right"><strong>Contact : 089364826482</strong></div>
-            </div>
-        </div>
-    </footer>
-    <!-- Modal Profil -->
-    <div class="modal fade" id="profil" tabindex="-1" role="dialog" aria-labelledby="profilLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="profilLabel">Profil</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="user" method="post" action="">
-                        <div class="form-group">
-                            <label for="nama">Nama</label>
-                            <input type="text" class="form-control form-control-user" id="nama" name="nama">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control form-control-user" id="email" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="telepon">Telepon</label>
-                            <input type="text" class="form-control form-control-user" id="telepon" name="telepon">
-                        </div>
-                        <div class="form-group">
-                            <label for="foto">Foto</label>
-                            <input type="file" class="form-control form-control-user" id="foto" name="foto">
-                        </div>
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control form-control-user" id="username" name="username">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control form-control-user" id="password" name="password">
-                        </div>
+    <script>
 
-                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                            Simpan
-                        </button>
+  $(document).ready(function(){   
+    
+    $('.add').click(function(){
 
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-dismiss="modal" data-target="#login">Logout</button>
-                </div>
-            </div>
-        </div>
-    </div>
+      var tgl1 = document.getElementById("datepicker1").value;
+      var tgl2 = document.getElementById("datepicker2").value;
+      
+      $.ajax({
+          url : "<?php echo base_url();?>c_admin/ambil_laporan",
+          method : "POST",
+          data : {tgl1: tgl1, tgl2: tgl2},
+          success: function(data){
+            console.log(data);
+            $('#laporan').html(data);
+            }
+        });
+
+
+      });
+
+    function printData() {
+      var divToPrint = document.getElementById("table");
+      newWin = window.open("");
+      newWin.document.write(divToPrint.outerHTML);
+      newWin.print();
+    newWin.close();
+  }
+
+     $('#print').click(function(){
+          printData();
+          
+     });
+      
+
+    // $.extend($.fn.dataTable.defaults, {
+    //   dom: 'Bfrtip'
+    // });
+    // $("#table").DataTable({
+    //   buttons: [
+    //     'copy', 'excel', 'pdf'
+    //   ]
+    // });
+
+
+    
+
+
+    //  $('#datepicker1').datepicker({
+    //     autoclose: true
+    //     });
+    //  $('#datepicker2').datepicker({
+    //   autoclose: true
+    // });
+
+//     $('#table').DataTable( {
+//     autoFill: true,
+//     dom : 'Bfrtip',
+//     buttons: [
+//     'copy', 'excel', 'pdf'
+//   ]
+    
+// } );
+      
+  });
+
+    
+
+</script>

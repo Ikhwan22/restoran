@@ -16,6 +16,9 @@
     <link href="<?= base_url('assets/'); ?>css/Droid+Serif-400-700-italic.css" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="<?= base_url('assets/'); ?>css/styles.css" rel="stylesheet" />
+    <script src="<?= base_url('assets/js/jquery-3.5.1.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/'); ?>js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="<?= base_url('assets/'); ?>css/bootstrap-datepicker.min.css" />
 </head>
 <body id="page-top">
     <!-- Navigation -->

@@ -243,6 +243,7 @@
             $.ajax({
                 type: "POST",
                 data: 'namaPesanan=' + namaPsn +'&jumlahPesan=' + jumlahPsn +'&totalHarga=' + totalPsn,
+                //data: {namaPesanan: namaPsn, jumlahPesan: jumlahPsn, totalHarga: totalPsn},
                 url: '<?= base_url('c_kasir/addToCart'); ?>',
                 success: function(data) {
                     $('#pesan-berhasil').html(data);
