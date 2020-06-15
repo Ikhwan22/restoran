@@ -15,6 +15,7 @@ class auth extends CI_Controller
         $data['makanan'] = $this->m_menu->getMenu("makanan");
         $data['minuman'] = $this->m_menu->getMenu("minuman");
         $data['lokasi'] = $this->m_menu->getLokasi();
+        $data['event'] = $this->m_menu->getEvent();
         $this->load->view('templates/header');
         $this->load->view('landingpage/home', $data);
         $this->load->view('templates/footer');

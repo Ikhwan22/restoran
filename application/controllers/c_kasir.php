@@ -1,8 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class c_kasir extends CI_Controller
-{
+class c_kasir extends CI_Controller{
+    public function __construct(){
+        parent::__construct();
+        if($this->session->userdata('status') !== 'kasir') {
+			redirect('auth/index');
+		}
+    }
 //start halaman pesan menu    
     public function index(){
         $this->load->view('templates/header');
@@ -104,6 +109,17 @@ class c_kasir extends CI_Controller
         //$aa = date_format($tanggalHarian,"d M Y");
         
         echo json_encode(array("total" =>$total, "detail" =>$detail));
+    }
+
+    public function insert_laporan(){
+        $data = array(
+            'total' => $this->input->post('total'),
+            'tanggal' => $this->input->post('tanggal')
+        );
+        
+        $this->m_laporanHarian->masukkan_laporan($data);
+        $pesan = "Data Berhasil ditambahkan";
+        echo $pesan;
     }
 // end halaman laporan harian
 

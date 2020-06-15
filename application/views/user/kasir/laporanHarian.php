@@ -42,27 +42,31 @@
                         </table>
                     </div>
                     <!-- end tabel list laporan -->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- total pemesanan harian -->
+                            <div class="row form-group">
+                                <label class = col for="total-pemesanan">Total Pemesanan Harian</label>
+                                <input type="text" class="col form-control" id="total-pemesanan" name="total-pemesanan" value="Rp. 0" readonly>
+                            </div>
 
-                    <div class="col-lg-6">
-                        <!-- total pemesanan harian -->
-                        <div class="row form-group">
-                            <label class = col for="total-pemesanan">Total Pemesanan Harian</label>
-                            <input type="text" class="col form-control" id="total-pemesanan" name="total-pemesanan" value="Rp. 0" readonly>
+                            <!-- total pembayaran harian-->
+                            <div class="row form-group">
+                                <label class = col for="total-pembayaran">Total Pembayaran Harian</label>
+                                <input type="text" class="col form-control" id="total-pembayaran" name="total-pembayaran" value="Rp. 0" readonly>
+                            </div>
+
+                            <!-- total kembalian-->
+                            <div class="row form-group">
+                                <label class = col for="total-kembalian">Total Kembalian</label>
+                                <input type="text" class="col form-control" id="total-kembalian" name="total-kembalian" value="Rp. 0" readonly>
+                            </div>
                         </div>
-
-                        <!-- total pembayaran harian-->
-                        <div class="row form-group">
-                            <label class = col for="total-pembayaran">Total Pembayaran Harian</label>
-                            <input type="text" class="col form-control" id="total-pembayaran" name="total-pembayaran" value="Rp. 0" readonly>
-                        </div>
-
-                        <!-- total kembalian-->
-                        <div class="row form-group">
-                            <label class = col for="total-kembalian">Total Kembalian</label>
-                            <input type="text" class="col form-control" id="total-kembalian" name="total-kembalian" value="Rp. 0" readonly>
+                        <div class="col-lg-6">
+                            <input type="hidden" name="total_disembunyikan" id="total_disembunyikan">
+                            <button class="btn btn-success" style="float: right;" id="kirim" name="kirim">Kirim Laporan</button>
                         </div>
                     </div>
-
 
                     </div>
                 </div>
@@ -79,6 +83,21 @@
     <script type="text/javascript">
         var tanggalHarian;
 
+        $(document).ready(function(){
+            $(document).on('click', '#kirim', function(){
+                var tanggal = $('#tanggal-harian').val();
+                var total = $('#total_disembunyikan').val();
+                $.ajax({
+                    url: "<?php echo base_url() ?>c_kasir/insert_laporan",
+                    method: 'post',
+                    data: {tanggal: tanggal, total: total},
+                    success: function(data){
+                        alert(data);
+                    }
+                });
+            });   
+        });
+
         jQuery(function($) {
             //tanggal harian ketika berubah atau diinputkan
             $('#tanggal-harian').on('input', function() {
@@ -86,6 +105,8 @@
                 getLaporanByTanggal(tanggalHarian);
             });
         });
+
+        
 
         function getLaporanByTanggal(tanggalHarian){
             $.ajax({
@@ -104,7 +125,9 @@
                     document.getElementById("total-pemesanan").value="Rp. "+Number(data.total[0].total).toLocaleString();
                     document.getElementById("total-pembayaran").value="Rp. "+Number(data.total[0].bayar).toLocaleString();
                     document.getElementById("total-kembalian").value="Rp. "+Number(data.total[0].kembalian).toLocaleString();
-                
+                    
+                    $('#total_disembunyikan').val(data.total[0].total);
+
                     var baris="";
                     if(data.detail.length == 0){
                         baris = '<div class="alert alert-warning alert-dismissible fade show" role="alert">'+
