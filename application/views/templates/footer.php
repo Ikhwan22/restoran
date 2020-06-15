@@ -15,7 +15,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="loginLabel">Login Customer</h5>
+                    <h5 class="modal-title" id="loginLabel"><span id="judul-modal-login"></span></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -133,5 +133,14 @@
     <script src="<?= base_url('assets/'); ?>js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url('assets/'); ?>js/bootstrap.min.js"></script>
 </body>
-
 </html>
+
+<script type="text/javascript">
+    function judulReservasi(){
+        $('#judul-modal-login').html("Login Reservasi Online");
+    }
+
+    function judulLogin(){
+        $('#judul-modal-login').html("Login User");
+    }
+</script>

@@ -73,7 +73,7 @@
                         </div>
                     <?php else:?>
                         <li class="nav-item">
-                            <button type="button" class="btn nav-link" data-toggle="modal" data-target="#loginCustomer">
+                            <button type="button" class="btn nav-link" data-toggle="modal" data-target="#loginCustomer" onclick="judulReservasi()">
                                 Reservasi Online
                             </button>
                         </li>
@@ -83,7 +83,7 @@
                             </button>
                         </li>
                         <li class="nav-item">
-                            <button type="button" class="btn nav-link" data-toggle="modal" data-target="#loginCustomer">
+                            <button type="button" class="btn nav-link" data-toggle="modal" data-target="#loginCustomer" onclick="judulLogin()">
                                 Login
                             </button>
                         </li>
