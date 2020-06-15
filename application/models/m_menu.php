@@ -10,9 +10,11 @@ class m_menu extends CI_model
     }
 
     //info item pesanan
-    function getItemMenu($id){//Item menu tiap satuannya
-        $this->db->where('id',$id);
-        return $this->db->get('menu');
+    function getItemMenu($id){//ambil harga dari diskonan
+        $this->db->select('ROUND(SUM(((100-event.diskon)/100)*menu.harga),0) AS harga');
+        $this->db->from('menu, event');
+        $this->db->where('menu.id',$id);
+        return $this->db->get();
     }
 
     //keranjang

@@ -47,4 +47,17 @@ class m_customer extends CI_model
       $this->db->insert($table, $data);
     }
 
+    function getReservasi($id){//ambil list reservasi berdasarkan id usser
+      $this->db->select('reservasi.*, DATE_FORMAT(reservasi.tanggal, "%d %M %Y") AS tgl_reservasi');
+      $this->db->from('reservasi, user');
+      $this->db->where('reservasi.nama=user.nama');
+      $this->db->where('user.id', $id);
+      $this->db->order_by('reservasi.id', 'DESC');
+      return $this->db->get();
+    }
+
+    function updateReservasi($id,$data){//id reservasi
+      $this->db->where('id', $id);
+      $this->db->update('reservasi', $data);
+    }
 }

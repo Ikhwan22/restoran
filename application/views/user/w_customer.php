@@ -86,5 +86,102 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-user btn-block">Lakukan Reservasi</button>
             </form>
+
+            <!-- start tabel riwayat reservasi -->
+            <div class="text-center mt-5">
+                <h3 class="section-heading text-uppercase">Riwayat Reservasi</h3>
+            </div>
+            <hr>
+
+            <!-- alert transaksi -->
+            <?php if($this->session->flashdata('transfer') == true):?>
+            <div class="text-center">
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <?= $this->session->flashdata('transfer'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            </div>
+            <?php else:?>
+            <?php endif;?>
+
+            <div class="table-responsive mt-5">
+                <table id="table" class="table table-bordered table-hover table-stripped mb-5">
+                    <thead>
+                        <tr class="text-center">
+                            <th>No</th>
+                            <th>Meja</th>
+                            <th>Waktu</th>
+                            <th>Tanggal</th>
+                            <th>Alasan</th>
+                            <th>Bukti Transfer</th>
+                        </tr>
+                    </thead>
+                    <tbody id="daftar-pesanan">
+                        <?php $i=1;
+                        foreach($reservasi as $rvs):?>
+                            <tr>
+                                <td><?= $i;?></td>
+                                <td><?= $rvs->meja;?></td>
+                                <td><?= $rvs->waktu;?></td>
+                                <td><?= $rvs->tgl_reservasi;?></td>
+                                <?php if($rvs->konfirmasi ==1):?>
+                                    <td>Reservasi Telah diKonfirmasi</td>
+                                    <td><button class="btn btn-info" data-toggle="modal" data-target="#modalUploadTransfer<?= $rvs->id;?>">Upload Bukti Transfer</button></td>
+                                <?php elseif($rvs->konfirmasi ==2):?>
+                                    <td>Reservasi ditolak karena <?=$rvs->alasan_penolakan;?></td>
+                                    <td>Reservasi dibatalkan</td>
+                                <?php else:?>
+                                    <td>Menunggu Kabar Reservasi</td>
+                                    <td>Sedang Menunggu Kabar</td>
+                                <?php endif;?>
+                            </tr>
+                        <?php $i++;
+                        endforeach;?>
+                    </tbody>
+
+                </table>
+            </div>
+            <!-- end tabel riwayat reservasi -->
         </div>
     </section>
+
+
+    <!-- Modal Upload Transfer-->
+    <?php foreach($reservasi as $rv):?>
+    <div class="modal fade" id="modalUploadTransfer<?= $rv->id;?>" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerLabel">Upload Bukti Pembayaran</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <?php echo form_open_multipart('c_customer/uploadBuktiTransfer');?>
+                    <input type="text" class="form-control" name="idReservasi" id="idReservasi" value="<?= $rv->id;?>" hidden>
+                        <div class="form-group">
+                            <label for="meja">Meja Pemesanan</label>
+                            <input type="text" class="form-control form-control-user" name="meja" value="<?= $rv->meja;?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal">Tanggal Reservasi</label>
+                            <input type="text" class="form-control form-control-user" name="tanggal" value="<?= $rv->tgl_reservasi;?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="waktu">Waktu Reservasi</label>
+                            <input type="text" class="form-control form-control-user" name="waktu" value="<?= $rv->waktu;?>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="fotoTransfer">Foto Transfer</label>
+                            <input type="file" class="form-control form-control-user" name="foto" id="foto" accept="image/png, image/jpeg" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Submit</button>
+                    <?php echo form_close();?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endforeach;?>
