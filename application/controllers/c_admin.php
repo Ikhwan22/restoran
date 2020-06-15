@@ -60,8 +60,7 @@ class c_admin extends CI_Controller
 
             $output .='
                 <tr>
-                    <td>'.$no.'</td>
-                    <td>'.$items->nama.'</td>                    
+                    <td>'.$no.'</td>                    
                     <td>'.$items->tanggal.'</td>
                     <td>Rp. '.$items->total.'</td>
                 </tr>
@@ -73,7 +72,6 @@ class c_admin extends CI_Controller
 
             $output .='
                 <tr>
-                    <td></td>
                     <td></td>                    
                     <td>Total Pendapatan</td>
                     <td>Rp. '.$items->totalSemuanya.'</td>

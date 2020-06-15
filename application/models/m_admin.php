@@ -51,13 +51,13 @@ class m_admin extends CI_model {
   }
 
   public function getTotalLaporan($tgl1, $tgl2){//ambil total laporan
-        $query = $this->db->query("SELECT SUM(total) AS totalSemuanya FROM kasir WHERE tanggal BETWEEN '$tgl1%' AND '$tgl2%'");
+        $query = $this->db->query("SELECT SUM(total) AS totalSemuanya FROM laporan_harian WHERE tanggal BETWEEN '$tgl1%' AND '$tgl2%'");
         return $query->result();
     }
 
   public function getLaporan($tgl1, $tgl2)
     {
-        $query = $this->db->query("SELECT nama, tanggal, total FROM kasir WHERE tanggal BETWEEN '$tgl1%' AND '$tgl2%'");
+        $query = $this->db->query("SELECT tanggal, total FROM laporan_harian WHERE tanggal BETWEEN '$tgl1%' AND '$tgl2%'");
         return $query->result();
     }
 

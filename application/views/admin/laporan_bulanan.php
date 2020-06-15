@@ -36,7 +36,6 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Nama</th>
                         <th scope="col">Tanggal</th>
                         <th scope="col">Total</th>
                     </tr> 
