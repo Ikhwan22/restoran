@@ -30,7 +30,7 @@ CREATE TABLE `event` (
 /*Data for the table `event` */
 
 insert  into `event`(`id`,`nama`,`diskon`) values 
-(1,'ini',15);
+(1,'ini',10);
 
 /*Table structure for table `kasir` */
 
@@ -45,7 +45,7 @@ CREATE TABLE `kasir` (
   `kembalian` int(11) NOT NULL,
   `tanggal` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `kasir` */
 
@@ -59,7 +59,8 @@ insert  into `kasir`(`id`,`nama`,`meja`,`total`,`bayar`,`kembalian`,`tanggal`) v
 (7,'bbb','e7',9000,10000,1000,'2020-06-11 09:50:44'),
 (8,'vvv','e3',125000,150000,25000,'2020-06-11 09:10:00'),
 (9,'ccc','e11',200000,200000,0,'2020-06-12 19:34:56'),
-(10,'asdasda','e1',100000,100000,0,'2020-06-12 20:34:45');
+(10,'asdasda','e1',100000,100000,0,'2020-06-12 20:34:45'),
+(11,'kkk','e4',176400,180000,3600,'2020-06-15 20:45:41');
 
 /*Table structure for table `keranjang` */
 
@@ -71,12 +72,9 @@ CREATE TABLE `keranjang` (
   `jumlah_pesanan` int(11) DEFAULT NULL,
   `harga_pesanan` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `keranjang` */
-
-insert  into `keranjang`(`id`,`nama_pesanan`,`jumlah_pesanan`,`harga_pesanan`) values 
-(2,'Ayam Goreng',1,20000);
 
 /*Table structure for table `kritik_saran` */
 
@@ -119,7 +117,7 @@ CREATE TABLE `laporan_harian` (
   `total` int(11) NOT NULL,
   `tanggal` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `laporan_harian` */
 
@@ -185,14 +183,17 @@ CREATE TABLE `reservasi` (
   `tanggal` date NOT NULL,
   `konfirmasi` int(1) NOT NULL,
   `alasan_penolakan` text,
+  `foto_transfer` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `reservasi` */
 
-insert  into `reservasi`(`id`,`nama`,`email`,`telepon`,`meja`,`bayar`,`waktu`,`tanggal`,`konfirmasi`,`alasan_penolakan`) values 
-(1,'Alvian','alvian@gmail.com',83483847,'e11',50000,'10:00:00','2020-06-14',1,NULL),
-(2,'ilham','ilham@gmail.com',85695124789,'e5',25000,'09:00:00','2020-06-15',2,'nggak sopan');
+insert  into `reservasi`(`id`,`nama`,`email`,`telepon`,`meja`,`bayar`,`waktu`,`tanggal`,`konfirmasi`,`alasan_penolakan`,`foto_transfer`) values 
+(1,'Alvian','alvian@gmail.com',83483847,'e11',50000,'10:00:00','2020-06-14',1,NULL,NULL),
+(2,'ilham','ilham@gmail.com',85695124789,'e5',25000,'09:00:00','2020-06-15',2,'nggak sopan',NULL),
+(3,'ilham','ilham@gmail.com',473647364,'e1',0,'16:40:00','2020-06-15',1,NULL,'saso-tusar-yP19KADwhEI-unsplash1.jpg'),
+(4,'ilham','ilham@gmail.com',473647364,'e3',0,'18:42:00','2020-06-15',0,NULL,NULL);
 
 /*Table structure for table `user` */
 

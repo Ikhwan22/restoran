@@ -92,6 +92,7 @@
                     method: 'post',
                     data: {tanggal: tanggal, total: total},
                     success: function(data){
+                        alert(data);
                     }
                 });
             });   

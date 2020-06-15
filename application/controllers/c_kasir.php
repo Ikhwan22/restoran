@@ -116,7 +116,10 @@ class c_kasir extends CI_Controller{
             'total' => $this->input->post('total'),
             'tanggal' => $this->input->post('tanggal')
         );
+        
         $this->m_laporanHarian->masukkan_laporan($data);
+        $pesan = "Data Berhasil ditambahkan";
+        echo $pesan;
     }
 // end halaman laporan harian
 
