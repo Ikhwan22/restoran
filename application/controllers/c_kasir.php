@@ -110,6 +110,14 @@ class c_kasir extends CI_Controller{
         
         echo json_encode(array("total" =>$total, "detail" =>$detail));
     }
+
+    public function insert_laporan(){
+        $data = array(
+            'total' => $this->input->post('total'),
+            'tanggal' => $this->input->post('tanggal')
+        );
+        $this->m_laporanHarian->masukkan_laporan($data);
+    }
 // end halaman laporan harian
 
 }
