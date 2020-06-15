@@ -23,10 +23,10 @@
                 <div class="modal-body">
                     <?php echo form_open('auth/loginCustomer');?>
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" name="username" placeholder="Masukan Username" require>
+                            <input type="text" class="form-control form-control-user" name="username" placeholder="Masukan Username" required>
                         </div>
                         <div class=" form-group">
-                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password" require>
+                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-user btn-block">Masuk Akun</button>
                     </form>
@@ -48,25 +48,13 @@
                 <div class="modal-body">
                     <?php echo form_open_multipart('auth/registerCustomer');?>
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" name="nama" placeholder="Masukan Nama" require>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control form-control-user" name="email" placeholder="Email" require>
+                            <input type="text" class="form-control form-control-user" name="nama" placeholder="Masukan Nama" required>
                         </div>
                         <div class=" form-group">
-                            <input type="number" class="form-control form-control-user" name="no_telp" placeholder="No Telp" require>
+                            <input type="text" class="form-control form-control-user" name="username" placeholder="Username" required>
                         </div>
                         <div class=" form-group">
-                            <div>
-                                <label for="gambarCustomer">Foto</label>
-                            </div>
-                            <input type="file" id="gambarCustomer" name="gambar" require>
-                        </div>
-                        <div class=" form-group">
-                            <input type="text" class="form-control form-control-user" name="username" placeholder="Username" require>
-                        </div>
-                        <div class=" form-group">
-                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password" require>
+                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-user btn-block">Register</button>
                     </form>
@@ -88,22 +76,22 @@
                 <div class="modal-body">
                     <?php echo form_open_multipart('c_customer/edit');?>
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" name="nama" placeholder="Masukan Nama" value="<?= $this->session->userdata('nama')?>" require>
+                            <input type="text" class="form-control form-control-user" name="nama" placeholder="Masukan Nama" value="<?= $this->session->userdata('nama')?>" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control form-control-user" name="email" placeholder="Email" value="<?= $this->session->userdata('email')?>" require>
+                            <input type="email" class="form-control form-control-user" name="email" placeholder="Email" value="<?= $this->session->userdata('email')?>" required>
                         </div>
                         <div class=" form-group">
-                            <input type="number" class="form-control form-control-user" name="no_telp" placeholder="No Telp" value="<?= $this->session->userdata('no_telp')?>" require>
+                            <input type="number" class="form-control form-control-user" name="no_telp" placeholder="No Telp" value="<?= $this->session->userdata('no_telp')?>" required>
                         </div>
                         <div class=" form-group">
                             <div>
                                 <label for="gambarCustomer">Foto</label>
                             </div>
-                            <input type="file" id="gambarCustomer" name="gambar">
+                            <input type="file" id="gambarCustomer" name="gambar" required>
                         </div>
                         <div class=" form-group">
-                            <input type="text" class="form-control form-control-user" name="username" placeholder="Username" value="<?= $this->session->userdata('username')?>" require>
+                            <input type="text" class="form-control form-control-user" name="username" placeholder="Username" value="<?= $this->session->userdata('username')?>" required>
                         </div>
                         <div class=" form-group">
                             <input type="password" class="form-control form-control-user" name="password" placeholder="Password" value="<?= $this->session->userdata('password')?>">
@@ -132,6 +120,19 @@
     <script src="<?= base_url('assets/'); ?>js/bootstrap.bundle.js"></script>
     <script src="<?= base_url('assets/'); ?>js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url('assets/'); ?>js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            <?php if($this->session->flashdata('registerError')):?>
+                alert("<?= $this->session->flashdata('registerError'); ?>");
+            <?php elseif($this->session->flashdata('loginError')):?>
+                alert("<?= $this->session->flashdata('loginError'); ?>");
+            <?php elseif($this->session->flashdata('pesanReservasi')):?>
+                alert("<?= $this->session->flashdata('pesanReservasi'); ?>");
+            <?php endif;?>
+        })
+    
+    </script>
 </body>
 </html>
 
@@ -143,4 +144,5 @@
     function judulLogin(){
         $('#judul-modal-login').html("Login User");
     }
+
 </script>

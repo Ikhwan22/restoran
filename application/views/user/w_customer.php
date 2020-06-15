@@ -29,26 +29,26 @@
                 <h3 class="section-heading text-uppercase">Reservasi Online</h3>
             </div>
             <hr>
-            <?php echo form_open('c_customer/reservasi');?>
+            <form id="formReservasi" action="<?= base_url('c_customer/reservasi')?>" method="post">
                 <div class="form-group row">
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <label for="nama">Nama</label>
-                        <input type="text" class="form-control form-control-user" name="nama" value="<?= $this->session->userdata('nama')?>" readonly require>
+                        <input type="text" id="iNama" class="form-control form-control-user" name="nama" value="<?= $this->session->userdata('nama')?>" readonly required>
                     </div>
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control form-control-user" name="email" value="<?= $this->session->userdata('email')?>" readonly require>
+                        <input type="email" id="iEmail" class="form-control form-control-user" name="email" value="<?= $this->session->userdata('email')?>" readonly required>
                     </div>
                     <div class="col-sm-4">
                         <label for="telepon">Telepon</label>
-                        <input type="number" class="form-control form-control-user" name="no_telp" value="<?= $this->session->userdata('no_telp')?>" readonly require>
+                        <input type="number" id="iTelepon" class="form-control form-control-user" name="no_telp" value="<?= $this->session->userdata('no_telp')?>" readonly required>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <div class="col-sm-4 mb-3 mb-sm-0">
                         <label for="selectMeja">Meja</label>
-                        <select class="form-control" id="selectMeja" name="meja" require>
+                        <select class="form-control" id="selectMeja" name="meja" required>
                             <option value=""></option>
                             <option value="e1">e1</option>
                             <option value="e2">e2</option>
@@ -75,13 +75,13 @@
                     </div>
                     <div class="col-sm-4">
                         <label for="tanggalPemesanan">Waktu</label>
-                        <input id="tanggalPemesanan" type="date" class="form-control form-control-user" name="tanggal" require>
+                        <input id="tanggalPemesanan" id="iTanggal" type="date" class="form-control form-control-user" name="tanggal" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4">
                         <label for="waktuPemesanan">Waktu</label>
-                        <input id="waktuPemesanan" type="time" class="form-control form-control-user" name="waktu" require>
+                        <input id="waktuPemesanan" id="iWaktu" type="time" class="form-control form-control-user" name="waktu" required>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-user btn-block">Lakukan Reservasi</button>

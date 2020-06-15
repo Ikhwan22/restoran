@@ -4,6 +4,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class auth extends CI_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('form_validation');
+    }
+
     public function index()
     {
         $data['makanan'] = $this->m_menu->getMenu("makanan");
@@ -42,26 +48,33 @@ class auth extends CI_Controller
         }
         
       } else {
+        $this->session->set_flashdata('loginError','Username atau password salah!'); 
         redirect('auth/index');
       }
     }
 
     public function registerCustomer()
     {
-        $url = $this->m_customer->uploadGambar();
-        $password = $this->input->post('password', true);
-        $data = array(
-            'nama'      => $this->input->post('nama', true),
-            'email'     => $this->input->post('email', true),
-            'telepon'   => $this->input->post('no_telp', true),
-            'foto'      => $url,
-            'username'  => $this->input->post('username', true),
-            'password'  => $password,
-            'status'    => "customer"
-        );
+        // $url = $this->m_customer->uploadGambar();
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.username]');
+        $this->form_validation->set_rules('password', 'Password', 'required');
 
-        $this->m_customer->register('user', $data);
-        redirect('auth/index');
+        if($this->form_validation->run() == true) {
+            $data = array(
+                'nama'      => $this->input->post('nama'),
+                'username'  => $this->input->post('username'),
+                'password'  => $this->input->post('password'),
+                'status'    => "customer"
+            );
+            $this->m_customer->register('user', $data);
+            redirect('auth/index');
+
+        } else {
+            $this->session->set_flashdata('registerError','Data gagal ditambahkan! pastikan username kamu unik'); 
+            redirect('auth/index');
+        }
+        
     }
 
     public function logout()
