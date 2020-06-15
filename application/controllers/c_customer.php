@@ -21,6 +21,8 @@ class c_customer extends CI_Controller
         $id = $this->session->userdata('id');
         $data['reservasi'] = $this->m_customer->getReservasi($id)->result();
 
+        //menampilkan event restoran
+        $data['event'] = $this->m_menu->getEvent();
         $this->load->view('templates/header');
         $this->load->view('user/w_customer', $data);
         $this->load->view('templates/footer');

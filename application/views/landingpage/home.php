@@ -4,6 +4,10 @@
             <img src="<?= base_url('assets/img/logo.png') ?>" width="15%" alt="">
             <h3 class="text-uppercase">Selamat Datang di Adam's Restoran</h3>
             <h4 class="text-uppercase">Segera Coba Fitur Reservasi Online</h4>
+            <br>
+            <?php foreach ($event as $eve) { ?>
+                <h4 class="text-uppercase">Kami Merayakan <?= $eve->nama ?> dengan diskon sebesar <?= $eve->diskon ?>%</h4>
+            <?php } ?>
         </div>
     </header>
     <!-- Services-->

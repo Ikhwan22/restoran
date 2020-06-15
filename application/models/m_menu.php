@@ -9,6 +9,15 @@ class m_menu extends CI_model
         return $this->db->get('menu')->result();
     }
 
+    public function getEvent(){
+        $data = $this->db->get('event');
+        if($data->num_rows()>=0){
+          return $data->result();
+        }else{
+          return false;
+        }
+    }
+
     //info item pesanan
     function getItemMenu($id){//ambil harga dari diskonan
         $this->db->select('ROUND(SUM(((100-event.diskon)/100)*menu.harga),0) AS harga');

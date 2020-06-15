@@ -5,6 +5,10 @@
             <h2 class="text-uppercase">Segera Coba Fitur</h2>
             <h2 class="text-uppercase" style="color: yellow;">Reservasi Online</h2>
             <h3 class="text-uppercase">Dibawah ini</h3>
+            <br>
+            <?php foreach ($event as $eve) { ?>
+                <h4 class="text-uppercase">Kami Merayakan <?= $eve->nama ?> dengan diskon sebesar <?= $eve->diskon ?>%</h4>
+            <?php } ?>
         </div>
     </header>
     <!-- Services-->
