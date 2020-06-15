@@ -78,7 +78,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <label for="tanggalPemesanan">Waktu</label>
+                        <label for="tanggalPemesanan">Tanggal</label>
                         <input id="tanggalPemesanan" id="iTanggal" type="date" class="form-control form-control-user" name="tanggal" required>
                     </div>
                 </div>

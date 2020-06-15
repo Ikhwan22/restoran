@@ -107,7 +107,8 @@ class c_customer extends CI_Controller
             }else{
                 $foto = $this->upload->data('file_name');
                 $data= array(
-                    'foto_transfer'     => $foto
+                    'foto_transfer'     => $foto,
+                    'bayar'             => 50000
                 );
     
                 $this->m_customer->updateReservasi($id,$data);

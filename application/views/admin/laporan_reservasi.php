@@ -30,6 +30,7 @@
                                         <th>Bayar</th>
                                         <th>Tanggal</th>
                                         <th>Waktu</th>
+                                        <th>Bukti Pembayaran</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -65,6 +66,8 @@
           </div>
         </div>
     </div>
+
+    <span id="modal-foto-transfer"></span>
 
     <script src="<?= base_url('assets/'); ?>js/jquery-3.4.1.js"></script>
     <script>
@@ -146,6 +149,7 @@
 
         function loadTabel(data){
             var baris="";
+            var modal = "";
             for(var i =0; i<data.detail.length; i++){
                 var no = i+1;
 
@@ -162,16 +166,38 @@
                                 '<td>'+data.detail[i].meja+'</td>' +
                                 '<td>'+data.detail[i].bayar+'</td>' +
                                 '<td>'+data.detail[i].tanggal+'</td>' +
-                                '<td>'+data.detail[i].waktu+'</td>';
+                                '<td>'+data.detail[i].waktu+'</td>'+
+                                '<td><button class="btn btn-info" data-toggle="modal" data-target="#fotoTransfer'+data.detail[i].id+'">Bukti Pembayaran</button></td>';
                         if(data.detail[i].konfirmasi == "0"){
                             baris+='<td><button class="btn btn-success konfirmasi" id="'+data.detail[i].id+'" value="'+data.detail[i].konfirmasi+'">Konfirmasi</button>&nbsp<button class="btn btn-danger ditolak" id="'+data.detail[i].id+'" data-toggle="modal" data-target="#modalTolak">Tolak</button></td>';
                         }else if(data.detail[i].konfirmasi == "1"){
-                            baris+='<td><button class="btn btn-success">Terkonfirmasi</button></td>';
+                            baris+='<td><button class="btn btn-success">Terkonfirmasi</button>&nbsp<button class="btn btn-danger ditolak" id="'+data.detail[i].id+'" data-toggle="modal" data-target="#modalTolak">Tolak</button></td>';
                         }else{
-                            baris+='<td><button class="btn btn-danger">Ditolak</button></td>';
+                            baris+='<td><button class="btn btn-danger">Ditolak</button>&nbsp<button class="btn btn-success konfirmasi" id="'+data.detail[i].id+'" value="'+data.detail[i].konfirmasi+'">Konfirmasi</button></td>';
                         }
                 baris+='</tr>';
+
+                modal += '<div class="modal fade" id="fotoTransfer'+data.detail[i].id+'" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">'+
+                            '<div class="modal-dialog" role="document">'+
+                                '<div class="modal-content">'+
+                                    '<div class="modal-header">'+
+                                        '<h5 class="modal-title" id="registerLabel">Bukti Pembayaran</h5>'+
+                                        '<button type="button" class="close" data-dismiss="modal" aria-label="Close">'+
+                                            '<span aria-hidden="true">&times;</span>'+
+                                        '</button>'+
+                                    '</div>'+
+                                    '<div class="modal-body">'+
+                                    '<img src="http://localhost/restoran/assets/uploads/transfer/'+data.detail[i].foto_transfer+'" class="rounded" alt="..." style="text-align:center; height: 500px; width: 465px;">'+
+                                            '<button type="button" class="btn btn-primary btn-user btn-block">Ok</button>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>';
             }
             $('#laporan-harian').html(baris);
+            $('#modal-foto-transfer').html(modal);
         }
     </script>
+
+
+    

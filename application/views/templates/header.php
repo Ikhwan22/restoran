@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
                     <?php if($this->session->userdata('status') == "customer"):?>
-                        <img src="<?= base_url($this->session->userdata('gambar'))?>" style="max-width: 100px;">
+                        <img src="<?= base_url('') ?>gambar/<?= $this->session->userdata('gambar');?>" style="max-width: 100px;">
                         <li class="nav-item">
                             <!-- <button type="button" class="btn nav-link" data-toggle="modal" data-target="#profil">
                                 Profil
@@ -46,7 +46,7 @@
                     <?php elseif($this->session->userdata('status') == "kasir"):?>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_kasir/index'); ?>">Pesan Menu</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_kasir/laporanHarian'); ?>">Laporan Harian</a></li>
-                        <img src="<?= base_url($this->session->userdata('gambar'))?>" style="max-width: 100px;">
+                        <img src="<?= base_url('') ?>gambar/<?= $this->session->userdata('gambar');?>" style="max-width: 100px;">
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: transparent;">
                                 <?= $this->session->userdata('nama');?>
@@ -61,7 +61,7 @@
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_admin/tambah_event'); ?>">Tambah Event</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_admin/laporan_reservasi'); ?>">Laporan Reservasi</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="<?= base_url('c_admin/laporan_bulanan'); ?>">Laporan Bulanan</a></li>
-                        <img src="<?= base_url($this->session->userdata('gambar'))?>" style="max-width: 100px;">
+                        <img src="<?= base_url('') ?>gambar/<?= $this->session->userdata('gambar');?>" style="max-width: 100px;">
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: transparent;">
                                 <?= $this->session->userdata('nama')?>
