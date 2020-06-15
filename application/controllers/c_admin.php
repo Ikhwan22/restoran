@@ -55,7 +55,7 @@ class c_admin extends CI_Controller
         $no = 1;
         
         $data= $this->m_admin->getLaporan($tgl1,$tgl2);            
-        
+        $total = $this->m_admin->getTotalLaporan($tgl1,$tgl2);
         foreach ($data as $items) {
 
             $output .='
@@ -63,14 +63,24 @@ class c_admin extends CI_Controller
                     <td>'.$no.'</td>
                     <td>'.$items->nama.'</td>                    
                     <td>'.$items->tanggal.'</td>
-                    <td>'.$items->total.'</td>
+                    <td>Rp. '.$items->total.'</td>
                 </tr>
             ';
             $no++;
         }
-        
-        return $output; 
 
+        foreach ($total as $items) {
+
+            $output .='
+                <tr>
+                    <td></td>
+                    <td></td>                    
+                    <td>Total Pendapatan</td>
+                    <td>Rp. '.$items->totalSemuanya.'</td>
+                </tr>
+            ';
+        }
+        return $output;
     }
 
     public function ambil_menu(){

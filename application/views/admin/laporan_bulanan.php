@@ -44,7 +44,6 @@
                 <tbody id="laporan">
                 </tbody>
             </table>
-
         </div>
 
     </section>
@@ -67,9 +66,9 @@
           method : "POST",
           data : {tgl1: tgl1, tgl2: tgl2},
           success: function(data){
-            console.log(data);
+            // console.log(data);
             $('#laporan').html(data);
-            }
+          }
         });
 
 
