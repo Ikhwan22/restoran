@@ -11,4 +11,8 @@ class m_laporanHarian extends CI_model{
         $this->db->like('tanggal', $tanggalharian);
         return $this->db->get('kasir');
     }
+
+    function masukkan_laporan($data){
+    	$this->db->insert('laporan_harian', $data);
+  	} 
 }
